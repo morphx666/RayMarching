@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayMarching", "RayMarching\RayMarching.csproj", "{2C71BF68-AFCE-474A-A6C9-9DF9FC8FE1C6}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MorphxLibs", "RayMarching\MorphxLibs\MorphxLibs.shproj", "{F92EE134-8CB3-455A-9160-841004898E8D}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		RayMarching\MorphxLibs\MorphxLibs.projitems*{2c71bf68-afce-474a-a6c9-9df9fc8fe1c6}*SharedItemsImports = 4
+		RayMarching\MorphxLibs\MorphxLibs.projitems*{f92ee134-8cb3-455a-9160-841004898e8d}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C71BF68-AFCE-474A-A6C9-9DF9FC8FE1C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C71BF68-AFCE-474A-A6C9-9DF9FC8FE1C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C71BF68-AFCE-474A-A6C9-9DF9FC8FE1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C71BF68-AFCE-474A-A6C9-9DF9FC8FE1C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34794AF6-B2C0-43CA-A1DC-4C479FCEFA40}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2C71BF68-AFCE-474A-A6C9-9DF9FC8FE1C6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RayMarching</RootNamespace>
+    <AssemblyName>RayMarching</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINFORMS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE;WINFORMS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RayMarching.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormStartup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStartup.Designer.cs">
+      <DependentUpon>FormStartup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStep1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStep1.Designer.cs">
+      <DependentUpon>FormStep1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStep4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStep4.Designer.cs">
+      <DependentUpon>FormStep4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStep3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStep3.Designer.cs">
+      <DependentUpon>FormStep3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStep4_3DRender.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStep4_3DRender.Designer.cs">
+      <DependentUpon>FormStep4_3DRender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shapes\Circle.cs" />
+    <Compile Include="Shapes\Shape.cs" />
+    <Compile Include="Shapes\Box.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FormStep2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStep2.Designer.cs">
+      <DependentUpon>FormStep2.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormStartup.resx">
+      <DependentUpon>FormStartup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStep1.resx">
+      <DependentUpon>FormStep1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStep2.resx">
+      <DependentUpon>FormStep2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStep3.resx">
+      <DependentUpon>FormStep3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStep4.resx">
+      <DependentUpon>FormStep4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStep4_3DRender.resx">
+      <DependentUpon>FormStep4_3DRender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="MorphxLibs\MorphxLibs.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
