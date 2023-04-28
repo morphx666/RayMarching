@@ -103,6 +103,10 @@ namespace MorphxLibs {
         public Vector(double magnitude, double angle, double x, double y) : this(magnitude, angle, new PointD(x, y)) {
         }
 
+        public Vector(Point origin, Point destination) {
+            Reset(origin.X, origin.Y, destination.X, destination.Y);
+        }
+
         public double Magnitude {
             get => mMagnitude;
             set { mMagnitude = value; }
@@ -321,8 +325,7 @@ namespace MorphxLibs {
         }
 
         public static Vector operator -(Vector v1, Vector v2) {
-            Vector v3 = new Vector(PointD.Empty, v2.Destination - v1.Destination);
-            return v3;
+            return new Vector(PointD.Empty, v2.Destination - v1.Destination);
         }
 
         public static Vector operator *(Vector v1, double s) {
@@ -333,13 +336,23 @@ namespace MorphxLibs {
             return v1 * s;
         }
 
+        public static Vector operator *(Vector v1, Vector v2) {
+            return Vector.FromPoints(v1.X1 * v2.X1, v1.Y1 * v2.Y1,
+                                     v1.X2 * v2.X2, v1.Y2 * v2.Y2);
+        }
+
         public static Vector operator /(Vector v1, double s) {
             return v1 * (1 / s);
         }
 
+        public static Vector operator /(Vector v1, Vector v2) {
+            return Vector.FromPoints(v1.X1 / v2.X1, v1.Y1 / v2.Y1,
+                                     v1.X2 / v2.X2, v1.Y2 / v2.Y2);
+        }
+
         public static Vector Abs(Vector v) {
             return Vector.FromPoints(Math.Abs(v.X1), Math.Abs(v.Y1),
-                                    Math.Abs(v.X2), Math.Abs(v.Y2));
+                                     Math.Abs(v.X2), Math.Abs(v.Y2));
         }
 
         public static Vector Max(Vector v1, Vector v2) {

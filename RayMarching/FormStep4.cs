@@ -3,7 +3,6 @@ using RayMarching.Shapes;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -13,21 +12,25 @@ using System.Windows.Forms;
 
 namespace RayMarching {
     public partial class FormStep4 : Form {
-        private List<Shape> shapes = new List<Shape>();
-        private Vector camera;
-        private double fov = 60 * Constants.ToRad;
+        private readonly List<Shape> shapes = new List<Shape>();
+        private readonly Vector camera;
+        private readonly double fov = 60 * Constants.ToRad;
 
         private bool isMouseDown = false;
 
-        private BlockingCollection<Vector> hitPoints = new BlockingCollection<Vector>();
-        private AutoResetEvent ae = new AutoResetEvent(false);
+        private readonly BlockingCollection<Vector> hitPoints = new BlockingCollection<Vector>();
+        private readonly AutoResetEvent ae = new AutoResetEvent(false);
 
         private FormStep4_3DRender form3D;
 
         private bool isClosing = false;
 
-        public FormStep4() {
+        public string Info { get; private set; }
+
+        public FormStep4(string info) {
             InitializeComponent();
+
+            Info = info;
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.UserPaint |
@@ -38,6 +41,7 @@ namespace RayMarching {
 
             Color c = Color.FromArgb(84, 44, 64);
             shapes.Add(new Circle(Vector.FromOrigin(200, 500), 80, c));
+            shapes.Add(new Box(Vector.FromOrigin(300, 400), 200, 80, c));
             shapes.Add(new Circle(Vector.FromOrigin(300, 200), 40, c));
             shapes.Add(new Circle(Vector.FromOrigin(700, 450), 50, c));
             shapes.Add(new Box(Vector.FromOrigin(600, 250), 100, 120, c));
@@ -87,6 +91,9 @@ namespace RayMarching {
 
             this.MouseDown += (object s, MouseEventArgs e) => {
                 isMouseDown = true;
+
+                camera.TranslateAbs(e.Location.X, e.Location.Y);
+                ae.Set();
             };
 
             this.MouseMove += (object s, MouseEventArgs e) => {
@@ -128,8 +135,18 @@ namespace RayMarching {
         private double DistanceToNearestShape(Vector fromVector) {
             double distance = double.MaxValue;
 
+            //double Mix(double x, double y, double a) => x * (1 - a) + y * a;
+
+            //double SMinPoly(double a, double b) {
+            //    const double k = 0.1;
+            //    double v = 0.5 + 0.5 * (b - a) / k;
+            //    double h  = v < 0 ? 0 : v > 1 ? 1 : v;
+            //    return Mix(b, a, h) - k * h * (1 - h);
+            //};
+
             foreach(Shape s in shapes)
                 distance = Math.Min(s.DistanceFrom(fromVector), distance);
+            //distance = SMinPoly(s.DistanceFrom(fromVector), distance);
 
             return distance;
         }
@@ -221,8 +238,9 @@ namespace RayMarching {
         }
 
         private void ShowInfo(Graphics g) {
-            g.DrawString("Use mouse to drag camera", this.Font, Brushes.WhiteSmoke, 10, 10);
-            g.DrawString("Use arrow keys to move and rotate camera", this.Font, Brushes.WhiteSmoke, 10, 10 + this.Font.Height);
+            g.DrawString(Info, this.Font, Brushes.CadetBlue, 10, 10);
+            g.DrawString("Use mouse to drag camera", this.Font, Brushes.WhiteSmoke, 10, this.Font.Height + 10);
+            g.DrawString("Use arrow keys to move and rotate camera", this.Font, Brushes.WhiteSmoke, 10, this.Font.Height * 2 + 10);
         }
     }
 }

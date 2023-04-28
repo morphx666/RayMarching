@@ -11,17 +11,20 @@ using System.Windows.Forms;
 
 namespace RayMarching {
     public partial class FormStep3 : Form {
-        private List<Shape> shapes = new List<Shape>();
-        private List<Vector> walkingCircles = new List<Vector>();
-        private Vector camera;
+        private readonly List<Shape> shapes = new List<Shape>();
+        private readonly List<Vector> walkingCircles = new List<Vector>();
+        private readonly Vector camera;
 
         private bool isMouseDown = false;
-        private Point mousePosition;
         private bool swipe = false;
-        private List<PointD> hitPoints = new List<PointD>();
+        private readonly List<PointD> hitPoints = new List<PointD>();
 
-        public FormStep3() {
+        public string Info { get; private set; }
+
+        public FormStep3(string info) {
             InitializeComponent();
+
+            Info = info;
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.UserPaint |
@@ -38,7 +41,7 @@ namespace RayMarching {
 
             Task.Run(() => {
                 while(true) {
-                    Thread.Sleep(30);
+                    Thread.Sleep(15);
                     this.Invalidate();
                 }
             });
@@ -67,7 +70,7 @@ namespace RayMarching {
 
             this.MouseDown += (object s, MouseEventArgs e) => {
                 isMouseDown = true;
-                mousePosition = e.Location;
+                camera.TranslateAbs(e.Location.X, e.Location.Y);
             };
 
             this.MouseMove += (object s, MouseEventArgs e) => {
@@ -177,9 +180,10 @@ namespace RayMarching {
         }
 
         private void ShowInfo(Graphics g) {
-            g.DrawString("Use mouse to drag camera", this.Font, Brushes.WhiteSmoke, 10, 10);
-            g.DrawString("Use arrow keys to move and rotate camera", this.Font, Brushes.WhiteSmoke, 10, 10 + this.Font.Height);
-            g.DrawString("Press ENTER to start swiping the scene and detect visible points", this.Font, Brushes.WhiteSmoke, 10, 10 + this.Font.Height*2);
+            g.DrawString(Info, this.Font, Brushes.CadetBlue, 10, 10);
+            g.DrawString("Use mouse to drag camera", this.Font, Brushes.WhiteSmoke, 10, this.Font.Height + 10);
+            g.DrawString("Use arrow keys to move and rotate camera", this.Font, Brushes.WhiteSmoke, 10, this.Font.Height * 2 + 10);
+            g.DrawString("Press ENTER to start swiping the scene and detect visible points", this.Font, Brushes.WhiteSmoke, 10, this.Font.Height * 3 + 10);
         }
     }
 }

@@ -35,7 +35,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormStep2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ray (Sphere) Marching";
+            this.Text = "Ray (Circle) Marching";
             this.ResumeLayout(false);
 
         }

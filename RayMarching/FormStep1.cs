@@ -9,14 +9,17 @@ using System.Windows.Forms;
 
 namespace RayMarching {
     public partial class FormStep1 : Form {
-        private List<Shape> shapes = new List<Shape>();
-        private Vector camera;
+        private readonly List<Shape> shapes = new List<Shape>();
+        private readonly Vector camera;
 
         private bool isMouseDown = false;
-        private Point mousePosition;
 
-        public FormStep1() {
+        public string Info { get; private set; }
+
+        public FormStep1(string info) {
             InitializeComponent();
+
+            Info = info;
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint |
                           ControlStyles.UserPaint |
@@ -35,7 +38,7 @@ namespace RayMarching {
 
             this.MouseDown += (object s, MouseEventArgs e) => {
                 isMouseDown = true;
-                mousePosition = e.Location;
+                camera.TranslateAbs(e.Location.X, e.Location.Y);
             };
 
             this.MouseMove += (object s, MouseEventArgs e) => {
@@ -45,6 +48,7 @@ namespace RayMarching {
             };
 
             this.MouseUp += (_, __) => isMouseDown = false;
+            Info = info;
         }
 
         protected override void OnPaint(PaintEventArgs e) {
@@ -84,7 +88,8 @@ namespace RayMarching {
         }
 
         private void ShowInfo(Graphics g) {
-            g.DrawString("Use mouse to drag camera", this.Font, Brushes.WhiteSmoke, 10, 10);
+            g.DrawString(Info, this.Font, Brushes.CadetBlue, 10, 10);
+            g.DrawString("Use mouse to drag camera", this.Font, Brushes.WhiteSmoke, 10, this.Font.Height + 10);
         }
     }
 }
